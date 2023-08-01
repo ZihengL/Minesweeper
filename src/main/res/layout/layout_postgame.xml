@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_margin="30dp"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:layout_gravity="center"
+    android:background="@color/dark_gray" >
+
+        <TextView
+            android:id="@+id/postgame_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/roboto_semibold"
+            android:textSize="16sp"
+            android:text="@string/win" />
+
+        <TextView
+            android:id="@+id/postgame_time"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="12sp"
+            android:text="@string/stats_time" />
+
+        <TextView
+            android:id="@+id/postgame_swept"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:textAlignment="textStart"
+            android:fontFamily="@font/roboto_light"
+            android:textSize="12sp"
+            android:text="@string/stats_swept" />
+
+        <Button
+            android:id="@+id/button_playagain"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_gravity="center|bottom"
+            android:fontFamily="@font/roboto_semibold"
+            android:backgroundTint="@color/darker_gray"
+            android:text="@string/play_again" />
+
+</LinearLayout>

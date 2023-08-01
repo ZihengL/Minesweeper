@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/button_cell"
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:scaleType="centerCrop"
+    android:background="@drawable/ic_hidden"
+    android:textColor="@color/gray_white"
+    android:textSize="100sp"
+    android:fontFamily="@font/roboto_semibold"
+    android:contentDescription="@string/cell_desc" />

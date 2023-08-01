@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Minesweeper</string>
+    <string name="label_time">Time</string>
+    <string name="default_timecount">000</string>
+    <string name="label_mines">Mines</string>
+    <string name="default_minescount">99</string>
+
+    <string name="win">VICTORY!</string>
+    <string name="lose">GAME OVER!</string>
+    <string name="stats_time">Time:</string>
+    <string name="stats_swept">Swept:</string>
+    <string name="play_again">Play Again</string>
+
+    <string name="settings_title">SETTINGS</string>
+    <string name="settings_predefined">Predefined Settings</string>
+    <string name="settings_custom">Custom Difficulty</string>
+    <string name="settings_rows">Rows</string>
+    <string name="settings_columns">Columns</string>
+    <string name="settings_mines">Mines:</string>
+    <string name="settings_save">SAVE</string>
+
+    <string name="options_desc">Options</string>
+    <string name="smiley_desc">Status</string>
+    <string name="cell_desc">Cell</string>
+</resources>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@color/dark_gray" >
+
+    <TextView
+        android:id="@+id/settings_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginBottom="0dp"
+        android:fontFamily="@font/roboto_semibold"
+        android:text="@string/settings_title"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/settings_predefined"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_title"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/settings_predefined"
+        android:textSize="16sp" />
+
+    <com.example.minesweeper.game.CustomListView
+        android:id="@+id/settings_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_predefined"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:padding="10dp"
+        android:background="@color/darker_gray" />
+
+    <TextView
+        android:id="@+id/settings_custom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settings_list"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/roboto_regular"
+        android:text="@string/settings_custom"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/settings_rows"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/settings_custom"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="10dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/settings_rows" />
+
+    <EditText
+        android:id="@+id/settings_rows_input"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@+id/settings_rows"
+        android:layout_alignBottom="@+id/settings_rows"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_light"
+        android:textSize="12sp"
+        android:background="@color/darker_gray"
+        />
+
+    <TextView
+        android:id="@+id/settings_columns"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_below="@+id/settings_rows"
+        android:layout_alignStart="@+id/settings_rows"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/settings_columns" />
+
+    <EditText
+        android:id="@+id/settings_columns_input"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_toEndOf="@+id/settings_columns"
+        android:layout_alignBottom="@+id/settings_columns"
+        android:fontFamily="@font/roboto_light"
+        android:textSize="12sp"
+        android:background="@color/darker_gray" />
+
+    <TextView
+        android:id="@+id/settings_mines"
+        android:layout_width="100dp"
+        android:layout_height="25dp"
+        android:layout_alignStart="@+id/settings_columns"
+        android:layout_below="@+id/settings_columns"
+        android:layout_marginTop="10dp"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_light"
+        android:text="@string/settings_mines" />
+
+    <Button
+        android:id="@+id/button_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_below="@+id/settings_mines"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/roboto_semibold"
+        android:backgroundTint="@color/darker_gray"
+        android:text="@string/settings_save" />
+
+</RelativeLayout>
