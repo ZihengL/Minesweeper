@@ -1,4 +1,4 @@
-package io.github.zihengl.demineur.game.enums;
+package io.github.zihengl.demineur.models.enums;
 
 public enum Difficulties {
 

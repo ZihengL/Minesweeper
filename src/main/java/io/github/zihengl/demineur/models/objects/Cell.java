@@ -1,6 +1,6 @@
-package io.github.zihengl.demineur.game.objects;
+package io.github.zihengl.demineur.models.objects;
 
-import io.github.zihengl.demineur.game.enums.Status;
+import io.github.zihengl.demineur.models.enums.Status;
 
 public class Cell {
 
@@ -15,6 +15,15 @@ public class Cell {
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
+
+        this.status = Status.BURIED;
+    }
+
+    public Cell(int x, int y, int value) {
+        this.x = x;
+        this.y = y;
+        this.value = value;
+
         this.status = Status.BURIED;
     }
 
@@ -26,8 +35,9 @@ public class Cell {
         return this.status;
     }
 
-    public void setValue() {
-
+    public void setValue(Grid grid) {
+        int mines = this.scanSurrounding(grid);
+        this.value = mines;
     }
 
     public void setStatus(Status status) {
@@ -38,15 +48,17 @@ public class Cell {
 
     public void dig() {
         if (this.status.equals(Status.BURIED))
-            this.setStatus(Status.DUG);
+            this.status = Status.DUG;
     }
 
-    public void toggleFlag() {
+    public Status toggleFlag() {
         if (this.status.equals(Status.BURIED))
-            this.setStatus(Status.FLAGGED);
+            this.status = Status.FLAGGED;
 
         if (this.status.equals(Status.FLAGGED))
-            this.setStatus(Status.BURIED);
+            this.status = Status.BURIED;
+
+        return this.status;
     }
 
     public int scanSurrounding(Grid grid) {
@@ -57,9 +69,12 @@ public class Cell {
             mines = 0;
 
         for (int y = minY; y < maxY; y++)
-            for (int x = minX; x < maxX; x++)
-                if (grid.getCell(x, y).value == Cell.MINE)
+            for (int x = minX; x < maxX; x++) {
+                Cell cell = grid.getCell(x, y);
+
+                if (cell != null && cell.value == Cell.MINE)
                     mines++;
+            }
 
         return mines;
     }
