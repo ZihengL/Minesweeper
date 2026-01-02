@@ -1,5 +1,6 @@
 package io.github.zihengl.demineur.models.objects;
 
+import io.github.zihengl.demineur.models.enums.Difficulties;
 import io.github.zihengl.demineur.models.enums.Status;
 
 import java.util.Random;
@@ -8,29 +9,19 @@ public class Grid {
 
     public final Cell[][] cells;
 
-    public Grid(int width, int height, int mines) {
+    private int dug;
+
+    public Grid(int width, int height) {
         this.cells = new Cell[height][width];
-
-        Random randomizer = new Random();
-        int placed = 0;
-        while (placed < mines) {
-            int y = randomizer.nextInt(height),
-                x = randomizer.nextInt(width);
-
-            if (this.cells[y][x] == null) {
-                this.cells[y][x] = new Cell(x, y, Cell.MINE);
-                placed++;
-            }
-        }
-
         for (int y = 0; y < height; y++)
             for (int x = 0; x < width; x++)
-                if (this.cells[y][x] == null) {
-                    Cell cell = new Cell(x, y);
-                    cell.setValue(this);
+                this.cells[y][x] = new Cell(x, y);
 
-                    this.cells[y][x] = cell;
-                }
+        this.dug = 0;
+    }
+
+    public Cell getCell(int x, int y) {
+        return this.cells[y][x];
     }
 
     public int getWidth() {
@@ -41,36 +32,52 @@ public class Grid {
         return this.cells.length;
     }
 
-    public Cell[][] getCells() {
-        return this.cells;
-    }
-
-    public Cell getCell(int x, int y) {
-        return this.cells[y][x];
+    public int getDugCount() {
+        return this.dug;
     }
 
     // METHODS
 
-    public int clampOnX(int x) {
-        return Math.min(Math.max(0, x), this.getWidth());
+    public void spawn(int x, int y, Difficulties difficulty) {
+        Random randomizer = new Random();
+        int placed = 0;
+
+        while (placed < difficulty.mines) {
+            int yr = randomizer.nextInt(difficulty.height),
+                xr = randomizer.nextInt(difficulty.width);
+
+            if (!(this.cells[yr][xr].isValue(Cell.MINE) || (xr == x && yr == y))) {
+                this.cells[yr][xr].setValue(Cell.MINE);
+                placed++;
+            }
+        }
+
+        for (Cell[] row : this.cells)
+            for (Cell cell : row)
+                if (!cell.isValue(Cell.MINE))
+                    cell.setValue(cell.countSurroundingMines(this));
     }
 
-    public int clampOnY(int y) {
-        return Math.min(Math.max(0, y), this.getHeight());
+    public void dig(int x, int y) {
+        Cell cell = this.cells[y][x];
+        if (!cell.isStatus(Status.BURIED)) return;
+
+        cell.dig();
+        if (cell.isValue(Cell.CLEAR)) {
+            int minY = Math.max(y - 1, 0),
+                maxY = Math.min(y + 1, this.getHeight() - 1),
+                minX = Math.max(x - 1, 0),
+                maxX = Math.min(x + 1, this.getWidth() - 1);
+
+            for (int y2 = minY; y2 <= maxY; y2++)
+                for (int x2 = minX; x2 <= maxX; x2++)
+                    this.dig(x2, y2);
+        }
+
+        this.dug++;
     }
 
-    public int dugCount() {
-        int dug = 0;
-
-        for (int y = 0; y < this.getHeight(); y++)
-            for (int x = 0; x < this.getWidth(); x++)
-                if (this.cells[y][x].getStatus().equals(Status.DUG))
-                    dug++;
-
-        return dug;
-    }
-
-    public int area() {
-        return this.getWidth() * this.getHeight();
+    public void toggleFlag(int x, int y) {
+        this.cells[y][x].toggleFlag();
     }
 }

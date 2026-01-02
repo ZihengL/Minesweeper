@@ -1,83 +1,82 @@
 package io.github.zihengl.demineur.models.objects;
 
 import io.github.zihengl.demineur.models.enums.Status;
+import io.github.zihengl.demineur.models.observer.Observable;
 
-public class Cell {
+public class Cell extends Observable {
 
+    public static final int CLEAR = 0;
     public static final int MINE = -1;
 
     public final int x;
     public final int y;
 
     private int value;
-    private Status status;
+    private Status status = Status.BURIED;
 
     public Cell(int x, int y) {
-        this.x = x;
-        this.y = y;
-
-        this.status = Status.BURIED;
+        this(x, y, 0);
     }
 
     public Cell(int x, int y, int value) {
         this.x = x;
         this.y = y;
         this.value = value;
-
-        this.status = Status.BURIED;
-    }
-
-    public int getValue() {
-        return this.value;
     }
 
     public Status getStatus() {
         return this.status;
     }
 
-    public void setValue(Grid grid) {
-        int mines = this.scanSurrounding(grid);
-        this.value = mines;
+    public boolean isStatus(Status status) {
+        return this.status.equals(status);
     }
 
-    public void setStatus(Status status) {
-        this.status = status;
+    public int getValue() {
+        return this.value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public boolean isValue(int value) {
+        return this.value == value;
+    }
+
+    public boolean isFatal() {
+        return this.isValue(MINE) && this.isStatus(Status.DUG);
     }
 
     // METHODS
 
     public void dig() {
-        if (this.status.equals(Status.BURIED))
-            this.status = Status.DUG;
+        this.status = Status.DUG;
+
+        this.notifyObserver();
     }
 
-    public Status toggleFlag() {
-        if (this.status.equals(Status.BURIED))
-            this.status = Status.FLAGGED;
+    public void toggleFlag() {
+        switch (this.status) {
+            case DUG -> { return; }
+            case BURIED -> this.status = Status.FLAGGED;
+            default -> this.status = Status.BURIED;
+        }
 
-        if (this.status.equals(Status.FLAGGED))
-            this.status = Status.BURIED;
-
-        return this.status;
+        this.notifyObserver();
     }
 
-    public int scanSurrounding(Grid grid) {
+    public int countSurroundingMines(Grid grid) {
         int minY = Math.max(this.y - 1, 0),
-            maxY = Math.min(this.y + 1, grid.getHeight()),
+            maxY = Math.min(this.y + 1, grid.getHeight() - 1),
             minX = Math.max(this.x - 1, 0),
-            maxX = Math.min(this.x + 1, grid.getWidth()),
-            mines = 0;
+            maxX = Math.min(this.x + 1, grid.getWidth() - 1);
 
-        for (int y = minY; y < maxY; y++)
-            for (int x = minX; x < maxX; x++) {
-                Cell cell = grid.getCell(x, y);
-
-                if (cell != null && cell.value == Cell.MINE)
-                    mines++;
-            }
+        int mines = 0;
+        for (int y = minY; y <= maxY; y++)
+            for (int x = minX; x <= maxX; x++)
+                mines += grid.getCell(x, y).value == MINE ? 1 : 0;
 
         return mines;
     }
-
-
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="io.github.zihengl.demineur.controllers.MainController"
+      style="-fx-background-color: #e5e5e5;">
+
+    <!--MENUBAR-->
+    <MenuBar>
+        <Menu fx:id="optionsMenu" text="Options"/>
+    </MenuBar>
+
+    <HBox fx:id="dashboard">
+        <padding>
+            <Insets top="10" bottom="10" left="10" right="10"/>
+        </padding>
+        <Text fx:id="timerText" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
+    </HBox>
+
+    <!--CELL GRID-->
+    <GridPane fx:id="cellGrid"/>
+</VBox>
