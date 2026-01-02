@@ -56,14 +56,13 @@ public class Cell extends Observable {
         this.notifyObserver();
     }
 
-    public void toggleFlag() {
-        switch (this.status) {
-            case DUG -> { return; }
-            case BURIED -> this.status = Status.FLAGGED;
-            default -> this.status = Status.BURIED;
-        }
+    public boolean toggleFlag() {
+        if (this.isStatus(Status.DUG))
+            return false;
 
+        this.status = this.isStatus(Status.FLAGGED) ? Status.BURIED : Status.FLAGGED;
         this.notifyObserver();
+        return true;
     }
 
     public int countSurroundingMines(Grid grid) {

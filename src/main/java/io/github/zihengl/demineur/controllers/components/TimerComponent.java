@@ -1,25 +1,27 @@
-package io.github.zihengl.demineur.models.objects;
+package io.github.zihengl.demineur.controllers.components;
 
 import io.github.zihengl.demineur.models.observer.Observable;
-import io.github.zihengl.demineur.models.observer.Observer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class Timer extends Observable {
+public class TimerComponent extends Observable {
 
-    private int time;
+    private final Text txtTime;
     private final Timeline timeline;
 
-    public Timer() {
-        this.time = 0;
+    private int time;
+
+    public TimerComponent(Text txtTime) {
+        this.txtTime = txtTime;
         this.timeline = new Timeline(
                 new KeyFrame(Duration.seconds(1), event -> {
-                    this.time++;
-                    this.notifyObserver();
+                    this.txtTime.setText(String.format("%03d", this.time++));
                 })
         );
         this.timeline.setCycleCount(Timeline.INDEFINITE);
+        this.time = 0;
     }
 
     public int getTime() {

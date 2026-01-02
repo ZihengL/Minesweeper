@@ -1,6 +1,5 @@
-package io.github.zihengl.demineur.controllers.command.commands.menubar;
+package io.github.zihengl.demineur.controllers.command;
 
-import io.github.zihengl.demineur.controllers.command.Command;
 import javafx.event.ActionEvent;
 
 public class QuitCommand implements Command<ActionEvent>  {

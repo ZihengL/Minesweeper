@@ -9,21 +9,40 @@
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
 
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.shape.Rectangle?>
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="io.github.zihengl.demineur.controllers.MainController"
-      style="-fx-background-color: #e5e5e5;">
+      style="-fx-background-color: #2E3033;">
 
     <!--MENUBAR-->
     <MenuBar>
         <Menu fx:id="optionsMenu" text="Options"/>
     </MenuBar>
 
-    <HBox fx:id="dashboard">
+    <HBox spacing="10">
         <padding>
             <Insets top="10" bottom="10" left="10" right="10"/>
         </padding>
-        <Text fx:id="timerText" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
+
+        <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+            <Image url="@images/TIMER.png"/>
+        </ImageView>
+        <Text fx:id="txtTime" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
+        <Rectangle width="10"/>
+
+        <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+            <Image url="@images/DUG.png"/>
+        </ImageView>
+        <Text fx:id="txtDugCount" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
+        <Rectangle width="10"/>
+
+        <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+            <Image url="@images/FLAG.png"/>
+        </ImageView>
+        <Text fx:id="txtFlagsCount" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
     </HBox>
 
     <!--CELL GRID-->

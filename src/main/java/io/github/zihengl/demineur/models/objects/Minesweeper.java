@@ -39,6 +39,18 @@ public class Minesweeper extends Observable {
         return this.difficulty.width * this.difficulty.height;
     }
 
+    public int getDugCount() {
+        return this.grid.getDugCount();
+    }
+
+    public int getFlagsCount() {
+        return this.grid.getFlagsCount();
+    }
+
+    public Gamestate getGamestate() {
+        return this.gamestate;
+    }
+
     // METHODS
 
     public void dig(int x, int y) {
@@ -59,8 +71,8 @@ public class Minesweeper extends Observable {
         if (!this.gamestate.equals(Gamestate.ONGOING))
             return;
 
-        this.grid.toggleFlag(x, y);
-        this.notifyObserver();
+        if (this.grid.toggleFlag(x, y))
+            this.notifyObserver();
     }
 
     public Gamestate check(int x, int y) {

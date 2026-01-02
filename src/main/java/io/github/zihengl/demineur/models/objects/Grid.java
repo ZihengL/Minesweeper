@@ -10,6 +10,7 @@ public class Grid {
     public final Cell[][] cells;
 
     private int dug;
+    private int flags;
 
     public Grid(int width, int height) {
         this.cells = new Cell[height][width];
@@ -18,6 +19,7 @@ public class Grid {
                 this.cells[y][x] = new Cell(x, y);
 
         this.dug = 0;
+        this.flags = 0;
     }
 
     public Cell getCell(int x, int y) {
@@ -36,6 +38,10 @@ public class Grid {
         return this.dug;
     }
 
+    public int getFlagsCount() {
+        return this.flags;
+    }
+
     // METHODS
 
     public void spawn(int x, int y, Difficulties difficulty) {
@@ -46,7 +52,7 @@ public class Grid {
             int yr = randomizer.nextInt(difficulty.height),
                 xr = randomizer.nextInt(difficulty.width);
 
-            if (!(this.cells[yr][xr].isValue(Cell.MINE) || (xr == x && yr == y))) {
+            if (!(this.cells[yr][xr].isValue(Cell.MINE) || xr == x && yr == y)) {
                 this.cells[yr][xr].setValue(Cell.MINE);
                 placed++;
             }
@@ -77,7 +83,13 @@ public class Grid {
         this.dug++;
     }
 
-    public void toggleFlag(int x, int y) {
-        this.cells[y][x].toggleFlag();
+    public boolean toggleFlag(int x, int y) {
+        Cell cell = this.cells[y][x];
+        if (cell.toggleFlag()) {
+            this.flags += cell.isStatus(Status.FLAGGED) ? 1 : -1;
+            return true;
+        }
+
+        return false;
     }
 }

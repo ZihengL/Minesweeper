@@ -1,5 +1,7 @@
 package io.github.zihengl.demineur.models.observer;
 
+import io.github.zihengl.demineur.controllers.MainController;
+
 public class Observable {
 
     private Observer observer;

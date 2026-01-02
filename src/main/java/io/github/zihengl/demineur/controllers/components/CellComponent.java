@@ -1,4 +1,4 @@
-package io.github.zihengl.demineur.controllers;
+package io.github.zihengl.demineur.controllers.components;
 
 import io.github.zihengl.demineur.models.enums.Status;
 import io.github.zihengl.demineur.models.objects.Cell;
@@ -13,7 +13,7 @@ import java.net.URL;
 
 public class CellComponent extends ImageView implements Observer {
 
-    public static final String RES_DIR = "/io/github/zihengl/demineur/images/Minesweeper_";
+    public static final String RES_DIR = "/io/github/zihengl/demineur/images/";
     public static final int CELL_SIZE = 30;
 
     public CellComponent(int x, int y) {
@@ -28,14 +28,16 @@ public class CellComponent extends ImageView implements Observer {
                 Minesweeper.instance.toggleFlag(x, y);
         });
 
-        this.update(Minesweeper.instance.getGrid().getCell(x, y));
+        Cell cell = Minesweeper.instance.getGrid().getCell(x, y);
+        cell.setObserver(this);
+        this.update(cell);
     }
 
     @Override
     public void update(Observable observable) {
         Cell cell = (Cell) observable;
         String res = cell.isStatus(Status.DUG) ? String.valueOf(cell.getValue()) : cell.getStatus().name();
-        URL url = getClass().getResource(RES_DIR + res + ".png");
+        URL url = getClass().getResource(RES_DIR + "Minesweeper_" + res + ".png");
 
         this.setImage(new Image(url.toString()));
         this.setFitWidth(CELL_SIZE);
