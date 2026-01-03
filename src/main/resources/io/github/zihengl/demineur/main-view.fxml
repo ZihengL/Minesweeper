@@ -28,23 +28,23 @@
         </padding>
 
         <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-            <Image url="@images/TIMER.png"/>
+            <Image url="@images/Icon_TIMER.png"/>
         </ImageView>
         <Text fx:id="txtTime" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
         <Rectangle width="10"/>
 
         <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-            <Image url="@images/DUG.png"/>
+            <Image url="@images/Icon_DUG.png"/>
         </ImageView>
         <Text fx:id="txtDugCount" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
         <Rectangle width="10"/>
 
         <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
-            <Image url="@images/FLAG.png"/>
+            <Image url="@images/Icon_FLAG.png"/>
         </ImageView>
         <Text fx:id="txtFlagsCount" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
     </HBox>
 
     <!--CELL GRID-->
-    <GridPane fx:id="cellGrid"/>
+    <GridPane fx:id="cellGrid" gridLinesVisible="true" style="-fx-background-color: #818181;"/>
 </VBox>

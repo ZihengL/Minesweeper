@@ -37,7 +37,7 @@ public class CellComponent extends ImageView implements Observer {
     public void update(Observable observable) {
         Cell cell = (Cell) observable;
         String res = cell.isStatus(Status.DUG) ? String.valueOf(cell.getValue()) : cell.getStatus().name();
-        URL url = getClass().getResource(RES_DIR + "Minesweeper_" + res + ".png");
+        URL url = getClass().getResource(RES_DIR + "Frame_" + res + ".jpg");
 
         this.setImage(new Image(url.toString()));
         this.setFitWidth(CELL_SIZE);

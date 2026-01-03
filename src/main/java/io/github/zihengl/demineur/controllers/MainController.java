@@ -79,8 +79,9 @@ public class MainController implements Observer {
         this.txtFlagsCount.setText(flags);
 
         Gamestate state = instance.getGamestate();
-        if (!state.equals(Gamestate.ONGOING))
+        if (!state.equals(Gamestate.ONGOING)) {
+            MainController.timer.pause();
             this.showEndGameAlert(state.equals(Gamestate.VICTORY));
-
+        }
     }
 }
