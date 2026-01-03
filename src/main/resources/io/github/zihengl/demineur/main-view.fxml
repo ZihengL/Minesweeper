@@ -18,8 +18,8 @@
       style="-fx-background-color: #2E3033;">
 
     <!--MENUBAR-->
-    <MenuBar>
-        <Menu fx:id="optionsMenu" text="Options"/>
+    <MenuBar style="-fx-font-family: Consolas; -fx-background-color: #818181;">
+        <Menu fx:id="optionsMenu" text="Options" style="-fx-font-family: Consolas; -fx-text-fill: #d3d3d3; -fx-fill: #d3d3d3; -fx-background-color: #59606E;"/>
     </MenuBar>
 
     <HBox spacing="10">

@@ -7,8 +7,6 @@ import io.github.zihengl.demineur.models.enums.Difficulties;
 import io.github.zihengl.demineur.models.objects.Grid;
 import io.github.zihengl.demineur.models.objects.Minesweeper;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 

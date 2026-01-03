@@ -51,6 +51,10 @@ public class Minesweeper extends Observable {
         return this.gamestate;
     }
 
+    public boolean isGamestate(Gamestate gamestate) {
+        return this.gamestate.equals(gamestate);
+    }
+
     // METHODS
 
     public void dig(int x, int y) {

@@ -9,6 +9,7 @@ import io.github.zihengl.demineur.models.objects.Minesweeper;
 import io.github.zihengl.demineur.models.observer.Observable;
 import io.github.zihengl.demineur.models.observer.Observer;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
@@ -59,6 +60,14 @@ public class MainController implements Observer {
         this.update(Minesweeper.instance);
     }
 
+    private void showEndGameAlert(boolean isVictory) {
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setTitle("Endgame");
+        confirm.setHeaderText(isVictory ? "VICTORY" : "DEFEAT");
+
+        confirm.showAndWait();
+    }
+
     @Override
     public void update(Observable observable) {
         Minesweeper instance = (Minesweeper) observable;
@@ -70,6 +79,8 @@ public class MainController implements Observer {
         this.txtFlagsCount.setText(flags);
 
         Gamestate state = instance.getGamestate();
-        // TODO: this.showAlert(); OR SOMETHING
+        if (!state.equals(Gamestate.ONGOING))
+            this.showEndGameAlert(state.equals(Gamestate.VICTORY));
+
     }
 }
