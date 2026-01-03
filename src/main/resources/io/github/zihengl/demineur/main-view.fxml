@@ -4,53 +4,102 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Text?>
 <?import javafx.geometry.Insets?>
-
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.layout.StackPane?>
+
 <VBox xmlns="http://javafx.com/javafx"
       xmlns:fx="http://javafx.com/fxml"
       fx:controller="io.github.zihengl.demineur.controllers.MainController"
       style="-fx-background-color: #2E3033;">
 
     <!--MENUBAR-->
-    <MenuBar style="-fx-font-family: Consolas; -fx-text-fill: #D9D9D9; -fx-background-color: #818181;">
-        <Menu fx:id="optionsMenu" text="Options" style="-fx-font-family: Consolas; -fx-text-fill: #D9D9D9; -fx-fill: #D9D9D9; -fx-background-color: #818181;"/>
+    <MenuBar style="-fx-font-family: Consolas;
+                    -fx-text-fill: #D9D9D9;
+                    -fx-background-color: #818181;">
+        <Menu fx:id="optionsMenu"
+              text="Options"
+              style="-fx-font-family: Consolas;
+                     -fx-text-fill: #D9D9D9;
+                     -fx-fill: #D9D9D9;
+                     -fx-background-color: #818181;"/>
     </MenuBar>
 
-    <HBox spacing="5" alignment="CENTER" style="-fx-border-width: 2; -fx-border-color: #D9D9D9;">
+    <!--DASHBOARD-->
+    <HBox spacing="5"
+          alignment="CENTER"
+          style="-fx-border-width: 2;
+                 -fx-border-color: #D9D9D9;">
         <padding>
             <Insets top="10" bottom="10" left="10" right="10"/>
         </padding>
 
-        <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="20"
+                   fitWidth="20"
+                   pickOnBounds="true"
+                   preserveRatio="true">
             <Image url="@images/Icon_TIMER.png"/>
         </ImageView>
-        <Text fx:id="txtTime" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
+        <Text fx:id="txtTime"
+              style="-fx-font-size: 20;
+                     -fx-font-family: Consolas Bold;
+                     -fx-font-weight: bold;
+                     -fx-fill: #818181;"/>
         <Rectangle width="10"/>
 
-        <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="20"
+                   fitWidth="20"
+                   pickOnBounds="true"
+                   preserveRatio="true">
             <Image url="@images/Icon_DUG.png"/>
         </ImageView>
-        <Text fx:id="txtDugCount" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
+        <Text fx:id="txtDugCount"
+              style="-fx-font-family: Consolas Bold;
+                     -fx-font-size: 20;
+                     -fx-font-weight: bold;
+                     -fx-fill: #818181;"/>
         <Rectangle width="10"/>
 
-        <ImageView fitHeight="20" fitWidth="20" pickOnBounds="true" preserveRatio="true">
+        <ImageView fitHeight="20"
+                   fitWidth="20"
+                   pickOnBounds="true"
+                   preserveRatio="true">
             <Image url="@images/Icon_FLAG.png"/>
         </ImageView>
-        <Text fx:id="txtFlagsCount" style="-fx-font-size: 20; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #818181;"/>
+        <Text fx:id="txtFlagsCount"
+              style="-fx-font-size: 20;
+                     -fx-font-family: Consolas Bold;
+                     -fx-font-weight: bold; -fx-fill: #818181;"/>
     </HBox>
 
-    <!--CELL GRID-->
     <StackPane fx:id="gameBoard">
-        <GridPane fx:id="cellGrid" gridLinesVisible="true" style="-fx-background-color: #818181;"/>
-        <Rectangle fx:id="backgroundDimmer" width="${gameBoard.width}" height="${gameBoard.height}" style="-fx-fill: rgba(20, 20, 20, 0.8);"/>
-        <Text fx:id="txtVictory" text="VICTORY" style="-fx-font-size: 60; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: #097969; -fx-background-color: white;"/>
-        <Text fx:id="txtDefeat" text="DEFEAT" style="-fx-font-size: 60; -fx-font-family: Consolas Bold; -fx-font-weight: bold; -fx-fill: red; -fx-background-color: white;"/>
+        <!--CELL GRID-->
+        <GridPane fx:id="cellGrid" gridLinesVisible="true"
+                  style="-fx-background-color: #818181;"/>
+
+        <!--END GAME MESSAGE ELEMENTS-->
+        <Rectangle fx:id="backgroundDimmer"
+                   width="${gameBoard.width}"
+                   height="${gameBoard.height}"
+                   style="-fx-fill: rgba(20, 20, 20, 0.8);"/>
+
+        <Text fx:id="txtVictory"
+              text="VICTORY"
+              style="-fx-font-size: 60;
+                     -fx-font-family: Consolas Bold;
+                     -fx-font-weight: bold;
+                     -fx-fill: #097969;
+                     -fx-background-color: white;"/>
+        <Text fx:id="txtDefeat"
+              text="DEFEAT"
+              style="-fx-font-size: 60;
+                     -fx-font-family: Consolas Bold;
+                     -fx-font-weight: bold;
+                     -fx-fill: red;
+                     -fx-background-color: white;"/>
     </StackPane>
 </VBox>
