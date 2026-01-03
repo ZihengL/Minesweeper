@@ -14,15 +14,10 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SeparatorMenuItem;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class MainController implements Observer {
-
-    private static TimerComponent timer;
-
-    public static TimerComponent getTimer() {
-        return MainController.timer;
-    }
 
     @FXML private Menu optionsMenu;
 
@@ -31,16 +26,18 @@ public class MainController implements Observer {
     @FXML private Text txtFlagsCount;
 
     @FXML private GridPane cellGrid;
+    @FXML private Rectangle backgroundDimmer;
+    @FXML private Text txtVictory;
+    @FXML private Text txtDefeat;
+
+    private TimerComponent timer;
 
     // MENUBAR
     @FXML private void initialize() {
-        // Timer
-        MainController.timer = new TimerComponent(this.txtTime);
-
         // Menubar: Difficulty buttons
         for (Difficulties difficulty : Difficulties.values()) {
             MenuItem item = new MenuItem();
-            item.setOnAction(new NewGameCommand(this.cellGrid, difficulty));
+            item.setOnAction(new NewGameCommand(this, difficulty));
             item.setText(difficulty.name());
 
             this.optionsMenu.getItems().add(item);
@@ -52,6 +49,9 @@ public class MainController implements Observer {
         quitItem.setOnAction(new QuitCommand());
         this.optionsMenu.getItems().addAll(new SeparatorMenuItem(), quitItem);
 
+        // Timer
+        this.timer = new TimerComponent(this.txtTime);
+
         // To update flags and dug counts
         Minesweeper.instance.setObserver(this);
 
@@ -60,12 +60,18 @@ public class MainController implements Observer {
         this.update(Minesweeper.instance);
     }
 
-    private void showEndGameAlert(boolean isVictory) {
-        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
-        confirm.setTitle("Endgame");
-        confirm.setHeaderText(isVictory ? "VICTORY" : "DEFEAT");
+    public TimerComponent getTimer() {
+        return this.timer;
+    }
 
-        confirm.showAndWait();
+    public GridPane getCellGrid() {
+        return this.cellGrid;
+    }
+
+    public void setStatusVisibility(boolean visible) {
+        this.backgroundDimmer.setVisible(visible);
+        this.txtVictory.setVisible(visible);
+        this.txtDefeat.setVisible(visible);
     }
 
     @Override
@@ -79,9 +85,12 @@ public class MainController implements Observer {
         this.txtFlagsCount.setText(flags);
 
         Gamestate state = instance.getGamestate();
-        if (!state.equals(Gamestate.ONGOING)) {
-            MainController.timer.pause();
-            this.showEndGameAlert(state.equals(Gamestate.VICTORY));
+        if (!instance.isGamestate(Gamestate.ONGOING)) {
+            Text txtState = instance.isGamestate(Gamestate.VICTORY) ? this.txtVictory : this.txtDefeat;
+
+            this.timer.pause();
+            this.backgroundDimmer.setVisible(true);
+            txtState.setVisible(true);
         }
     }
 }

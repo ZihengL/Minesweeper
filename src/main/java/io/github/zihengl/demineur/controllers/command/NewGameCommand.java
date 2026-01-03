@@ -12,28 +12,30 @@ import javafx.stage.Stage;
 
 public class NewGameCommand implements Command<ActionEvent> {
 
-    private final GridPane container;
+    private final MainController controller;
     private final Difficulties difficulty;
 
-    public NewGameCommand(GridPane container, Difficulties difficulty) {
-        this.container = container;
+    public NewGameCommand(MainController controller, Difficulties difficulty) {
+        this.controller = controller;
         this.difficulty = difficulty;
     }
 
     @Override
     public void handle(ActionEvent event) {
         Minesweeper.instance.createNewGame(this.difficulty);
-        this.container.getChildren().clear();
+        GridPane cellGrid = this.controller.getCellGrid();
 
+        cellGrid.getChildren().clear();
         Grid grid = Minesweeper.instance.getGrid();
         for (int y = 0; y < grid.getHeight(); y++)
             for (int x = 0; x < grid.getWidth(); x++)
-                this.container.add(new CellComponent(x, y), y, x);
+                cellGrid.add(new CellComponent(x, y), y, x);
 
         Stage stage = Application.getStage();
         stage.sizeToScene();
         stage.centerOnScreen();
 
-        MainController.getTimer().reset();
+        this.controller.setStatusVisibility(false);
+        this.controller.getTimer().reset();
     }
 }
