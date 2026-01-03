@@ -84,12 +84,11 @@ public class MainController implements Observer {
         String flags = String.format("%03d", instance.getFlagsCount());
         this.txtFlagsCount.setText(flags);
 
-        Gamestate state = instance.getGamestate();
         if (!instance.isGamestate(Gamestate.ONGOING)) {
-            Text txtState = instance.isGamestate(Gamestate.VICTORY) ? this.txtVictory : this.txtDefeat;
-
             this.timer.pause();
             this.backgroundDimmer.setVisible(true);
+
+            Text txtState = instance.isGamestate(Gamestate.VICTORY) ? this.txtVictory : this.txtDefeat;
             txtState.setVisible(true);
         }
     }
