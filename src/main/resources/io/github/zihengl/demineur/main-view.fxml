@@ -78,7 +78,8 @@
 
     <StackPane fx:id="gameBoard">
         <!--CELL GRID-->
-        <GridPane fx:id="cellGrid" gridLinesVisible="true"
+        <GridPane fx:id="cellGrid"
+                  gridLinesVisible="true"
                   style="-fx-background-color: #818181;"/>
 
         <!--END GAME MESSAGE ELEMENTS-->
