@@ -52,7 +52,9 @@ public class Grid {
             int yr = randomizer.nextInt(difficulty.height),
                 xr = randomizer.nextInt(difficulty.width);
 
-            if (!(this.cells[yr][xr].isValue(Cell.MINE) || xr == x && yr == y)) {
+            if (!this.cells[yr][xr].isValue(Cell.MINE) &&
+                ((xr < x - 1 || xr > x + 1) ^ (yr < y - 1 || yr > y + 1))
+            ) {
                 this.cells[yr][xr].setValue(Cell.MINE);
                 placed++;
             }
